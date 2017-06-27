@@ -15,7 +15,6 @@ app.use(express.static("public"));
 
 
 
-
 //Simple index route
 app.get("/", function(req, res) {
 	res.send(index.html);

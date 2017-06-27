@@ -1,6 +1,7 @@
-# Save-A-Pet
+# NPR-News-App
 
-## Find your new best friend today and save a pet!
+## Find the latest articles from NPR news with the click of a button!
 
-This app lets you browse available animals at your local shelter (in this case Wake County Animal Shelter). Fall in love and adopt your new companion today.
+This app lets you find and save the latest news from NPR's website. You can also take notes, save those notes, delete them if you wish and save and delete articles.
+
 
