@@ -22,9 +22,23 @@ app.use(bodyParser.urlencoded({
 //serve static content for the app from the "public" directory in the application directory
 app.use(express.static("public"));
 
-//handlebars
+//handlebars setup as view engine
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
+
+//Database configuration with mongoose
+mongoose.connect("mongodb://localhost/NPRarticles");
+var db = mongoose.connection;
+
+//Show any mongoose errors
+db.on("error", function(error) {
+	console.log("Mongoose Error: ", error);
+});
+
+//Once logged in to the db through mongoose, log a success message
+db.once("open", function() {
+	console.log("Mongoose connection successful.");
+});
 
 //Simple index route
 app.get("/", function(req, res) {
