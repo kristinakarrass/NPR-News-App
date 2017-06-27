@@ -7,6 +7,10 @@ var exhbs = require("express-handlebars");
 var cheerio = require("cheerio");
 var request = require("request");
 
+//require Article and Note models
+var Article = require("./models/Article.js");
+var Note = require("./models/Note.js");
+
 //Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
