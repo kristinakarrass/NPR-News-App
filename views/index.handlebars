@@ -1,0 +1,59 @@
+<div class="container">
+{{!-- display all articles --}}
+{{!-- display saved articles --}}
+{{!-- display articles with notes --}}
+  <div class="row">
+    <h1 class="text-center">Eat-Da-Burger</h1>
+  </div>
+  
+  <div class="row">
+    <img src="../assets/img/burger.png" class="img-responsive center-block" alt="burger">
+  </div>
+
+  <div class="row">
+  {{!ordered burger display and devour it button}}
+  <div class="col-md-4">
+    <p class="text-center"><strong>Click to devour your burger!</strong></p>  
+    <ul class="list-group">
+    {{#each Articles}}
+    	<li class="list-group-item">
+    	   {{this.id}} {{this.burger_name}}
+      </li>
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+            <button type="submit" class="devour btn btn-primary">Devour!</button>
+        </form>
+    {{/each}}
+  </ul>
+  </div>
+
+  {{!row for burger input}}
+  <div class="col-md-4">
+
+    <p class="text-center"><strong>Order the awesomest juiciest burger you can think of!</strong></p>    
+    <form class="create-update-form" action="/" method="POST">
+      <div class="form-group text-center">
+        <textarea class="form-control" name="burger_name" rows="3" placeholder="enter your burger here"></textarea>
+        <button type="submit" class="btn btn-primary">Order Burger!</button>
+      </div>
+    </form>
+
+  </div>
+
+  {{!display devoured burgers}}
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <tbody>
+        <p class="text-center"><strong>Devoured Burgers</strong></p>
+      	{{#each burgers}}
+        {{#if this.devoured}}
+      	<tr>
+      		<td><p>{{this.id}} {{this.burger_name}}</p></td>
+      	</tr>
+        {{/if}}
+      	{{/each}}
+      </tbody>
+     </table>
+    </div> 	
+  </div>
+
+</div>

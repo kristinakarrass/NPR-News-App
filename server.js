@@ -17,6 +17,7 @@ mongoose.Promise = Promise;
 //set port to 3000 or whichever one is used in environment variable
 var PORT = process.env.PORT || 3000;
 
+//set up express
 var app = express();
 
 //Set the app up with body-parser and a static folder
@@ -79,8 +80,14 @@ app.get("/scrape", function(req, res) {
         });
     });
     //tell user scrape is completed
-    res.send("scrape complete"); //make this a modal with handlebars and send it to HTML
+    res.redirect("/"); //make this a modal with handlebars and send it to HTML
 });
+
+//route to display articles
+//route to save articles
+//route to save notes
+//route to delete notes
+//route to delete articles?
 
 // Listen on PORT
 app.listen(PORT, function() {
