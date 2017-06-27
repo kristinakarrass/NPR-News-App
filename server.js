@@ -76,7 +76,7 @@ app.get("/scrape", function(req, res) {
     });
     //tell user scrape is completed
     res.send("scrape complete"); //make this a modal with handlebars and send it to HTML
-})
+});
 
 // Listen on PORT
 app.listen(PORT, function() {
