@@ -3,7 +3,7 @@
 {{!-- display saved articles --}}
 {{!-- display articles with notes --}}
   <div class="row">
-    <h1 class="text-center">Eat-Da-Burger</h1>
+    <h1 class="text-center"></h1>
   </div>
   
   <div class="row">
@@ -12,19 +12,23 @@
 
   <div class="row">
   {{!ordered burger display and devour it button}}
-  <div class="col-md-4">
-    <p class="text-center"><strong>Click to devour your burger!</strong></p>  
-    <ul class="list-group">
-    {{#each Articles}}
-    	<li class="list-group-item">
-    	   {{this.id}} {{this.burger_name}}
-      </li>
-        <form action="/{{this.id}}?_method=PUT" method="POST">
-            <button type="submit" class="devour btn btn-primary">Devour!</button>
-        </form>
-    {{/each}}
-  </ul>
-  </div>
+  {{#each Articles}}
+    <div class="card">
+      <div class="card-panel hoverable">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src={{this.imgLink}}>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
+          <p><a href={{this.link}}>Read The Article</a></p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
+          <p>{{this.teaser}}}</p>
+        </div>
+      </div>
+    </div>
+  {{/each}}
 
   {{!row for burger input}}
   <div class="col-md-4">
