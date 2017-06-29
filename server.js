@@ -2,7 +2,7 @@
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var express = require("express");
-var exhbs = require("express-handlebars");
+var exphbs = require("express-handlebars");
 //scraping tools
 var cheerio = require("cheerio");
 var request = require("request");
