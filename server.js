@@ -74,7 +74,8 @@ app.get("/scrape", function(req, res) {
             	}
             	//or log the doc
             	else {
-            		console.log(doc);
+                    // Materialize.toast(message, displayLength, className, completeCallback);
+                    Materialize.toast('Your articles have been scraped!', 4000) // 4000 is the duration of the toast
             	}
             });
         });
@@ -84,6 +85,21 @@ app.get("/scrape", function(req, res) {
 });
 
 //route to display articles
+// This will get the articles we scraped from the mongoDB
+app.get("/articles", function(req, res) {
+  // Grab every doc in the Articles array
+  Article.find({}, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
+});
+
 //route to save articles
 //route to save notes
 //route to delete notes
