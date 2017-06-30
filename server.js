@@ -45,7 +45,7 @@ db.once("open", function() {
     console.log("Mongoose connection successful.");
 });
 
-//Routes
+//Routes -- put them in a different folder and require them here
 //=======================================================================================
 
 //A GET request to scrape the NPR.org website for newsarticles
