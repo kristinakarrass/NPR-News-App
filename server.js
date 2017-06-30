@@ -3,6 +3,8 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var express = require("express");
 var exphbs = require("express-handlebars");
+//debugging tool
+var logger = reuqire("morgan");
 //scraping tools
 var cheerio = require("cheerio");
 var request = require("request");
@@ -20,12 +22,13 @@ var PORT = process.env.PORT || 3000;
 //set up express
 var app = express();
 
-//Set the app up with body-parser and a static folder
+//set the app up with body-parser and a static folder
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 //serve static content for the app from the "public" directory in the application directory
-app.use(express.static("public"));
+app.use(express.static(process.cwd() + "public"));
 
 //handlebars setup as view engine
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
