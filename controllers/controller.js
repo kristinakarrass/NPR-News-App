@@ -77,6 +77,17 @@ router.get("/articles", function(req, res) {
   });
 });
 
+router.delete("/delete/:id", function(req, res) {
+    Article.findByIdAndRemove(req.params.id, function(error, doc) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.redirect("/articles");
+        }
+    });
+});
+
 //route to save notes
 //route to delete notes
 //route to delete articles?

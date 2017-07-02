@@ -1,10 +1,5 @@
 $(document).ready(function(){
 
-// $("#scrape").on("click", function() {
-// 	event.preventDefault();
-//     location.href = "/scrape";
-// });
-
 //save an article
 $(document).on("click", "#save", function(){
         $.ajax({
@@ -18,11 +13,14 @@ $(document).on("click", "#save", function(){
             }
         })
     });
-
-// $(document).on("click", "#savedArticles", function() {
-// 	event.preventDefault();
-// 	location.href = "/articles";
-// });
+$(document).on("click", "#delete", function() {
+	var id = $(this).data("id");
+	console.log(id);
+	$.ajax({
+		method: "Delete",
+		url: "/delete/" + id
+	});
+});
 
 });
 
