@@ -20,6 +20,7 @@ $(document).on("click", "#delete", function() {
 		method: "Delete",
 		url: "/delete/" + id
 	});
+	location.href = "/articles";
 });
 
 });

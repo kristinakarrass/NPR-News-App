@@ -83,6 +83,7 @@ router.delete("/delete/:id", function(req, res) {
             console.log(error);
         }
         else {
+            req.method = "GET";
             res.redirect("/articles");
         }
     });
