@@ -1,63 +1,81 @@
-<div class="container">
-{{!-- display all articles --}}
-{{!-- display saved articles --}}
-{{!-- display articles with notes --}}
-  <div class="row">
-    <h1 class="text-center"></h1>
-  </div>
-  
-  <div class="row">
-    <img src="../assets/img/burger.png" class="img-responsive center-block" alt="burger">
-  </div>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">NPR News Scraper</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/scrape" id="scrape" class="btn-large waves-effect waves-light red lighten-1">Scrape Articles</a></li>
+                    <li><a href="/articles">Saved Articles</a></li>
+                    <li>
+                        <a href="http://www.npr.org/sections/news/"><img id="logo" src="../images/logo.gif" alt="nprLogo"></a>
+                    </li>
+                    <li><a href="https://github.com/kristinakarrass/NPR-News-App">Git Hub Repo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-  <div class="row">
-  {{!ordered burger display and devour it button}}
-  {{#each Articles}}
-    <div class="card">
-      <div class="card-panel hoverable">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src={{this.imgLink}}>
+    <main>
+        <div class="container">
+            <br>
+            <br>
+            <h1 class="header center grey-text text-lighten-2">NPR News Scraper</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">Get the latest articles from NPR.org</h5>
+            </div>
+            <div class="row center">
+              <ul class="collection">
+                {{#if this}}
+                <li class="collection-item red lighten-1 white-text">Please press the Scrape button to get the latest articles</li>
+                {{/if}}
+                {{#unless this}}
+                <li class="collection-item grey white-text">Here are NPR's latest articles</li>
+                {{/unless}}
+              </ul>
+            </div>
+            <br>
+            <br>
         </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
-          <p><a href={{this.link}}>Read The Article</a></p>
+        <div class="container">
+           {{!-- display each article in a card --}}
+            {{#each article}}
+            <div class="col s12 col m6 col l4" id="{{this.id}}">
+              <div class="card">
+                <div class="card-panel hoverable">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src={{this.imgLink}}>
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
+                    <p><a href={{this.link}}>Read</a></p>
+                    <p><a href="#" id="{{this.id}}">Delete</a></p>
+                    <p><a href="#" id="{{this.id}}">Comment</a></p>
+                  </div>
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
+                    <p>{{this.teaser}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
         </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
-          <p>{{this.teaser}}}</p>
+    </main>
+
+    <footer class="page-footer black">
+        <div class="copyright grey-text center">
+            Copyright to all content belongs to NPR News, as all articles on this page were scraped from their site. Please visit <a class="link grey-text" href="www.npr.org/sections/news">NPR.org</a> to read more about the latest news!
         </div>
-      </div>
-    </div>
-  {{/each}}
+    </footer>
 
-  {{!row for burger input}}
-  <div class="col-md-4">
 
-    <p class="text-center"><strong>Order the awesomest juiciest burger you can think of!</strong></p>    
-    <form class="create-update-form" action="/" method="POST">
-      <div class="form-group text-center">
-        <textarea class="form-control" name="burger_name" rows="3" placeholder="enter your burger here"></textarea>
-        <button type="submit" class="btn btn-primary">Order Burger!</button>
-      </div>
-    </form>
-
+  <div id="noteModal" class="modal">
+  <div class="modal-content">
   </div>
-
-  {{!display devoured burgers}}
-  <div class="col-md-4">
-    <table class="table table-bordered">
-      <tbody>
-        <p class="text-center"><strong>Devoured Burgers</strong></p>
-      	{{#each burgers}}
-        {{#if this.devoured}}
-      	<tr>
-      		<td><p>{{this.id}} {{this.burger_name}}</p></td>
-      	</tr>
-        {{/if}}
-      	{{/each}}
-      </tbody>
-     </table>
-    </div> 	
+  <div class="modal-footer">
+    <a href="#" id="saveNote" class="modal-action modal-close waves-effect waves-red btn-flat">Save</a>
+    <a href="#" id="deleteNote" class="modal-action waves-effect waves-grey btn-flat">Delete</a>
   </div>
-
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+<script type="text/javascript" src="./controllers/controller.js"></script>
