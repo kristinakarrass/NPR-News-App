@@ -36,19 +36,22 @@
             <br>
         </div>
         <div class="container">
+          <div class="row">
            {{!-- display each article in a card --}}
             {{#each article}}
-            <div class="col s12 col m6 col l4" id="{{this.id}}">
+            <div class="col l4" id="{{this.id}}">
               <div class="card">
                 <div class="card-panel hoverable">
                   <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src={{this.imgLink}}>
+                    <img class="activator" src="{{this.imgLink}}">
                   </div>
                   <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
-                    <p><a href={{this.link}}>Read</a></p>
-                    <p><a href="#" id="{{this.id}}">Delete</a></p>
-                    <p><a href="#" id="{{this.id}}">Comment</a></p>
+                    <p>
+                      <a href={{this.link}} target="blank">Read</a>
+                      <a href="#" id="{{this.id}}">Delete</a>
+                      <a href="#" id="{{this.id}}">Comment</a>
+                    </p>
                   </div>
                   <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
@@ -58,6 +61,7 @@
               </div>
             </div>
             {{/each}}
+        </div>
         </div>
     </main>
 
@@ -76,6 +80,4 @@
     <a href="#" id="deleteNote" class="modal-action waves-effect waves-grey btn-flat">Delete</a>
   </div>
 </div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
-<script type="text/javascript" src="./controllers/controller.js"></script>
+
