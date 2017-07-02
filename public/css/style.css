@@ -37,6 +37,7 @@
 	margin: 15px;
 }
 
-#deleteNote {
+#deleteNote, #delete {
 	margin-right: 25px;
 }
+

@@ -60,6 +60,8 @@ $(document).ready(function() {
             data: {
                 note: note
             }
+        }).done(function(data) {
+        	console.log(data);
         });
     });
 

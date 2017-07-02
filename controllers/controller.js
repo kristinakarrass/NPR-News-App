@@ -71,7 +71,6 @@ router.get("/articles", function(req, res) {
       var hbsObject = {
         savedArticle: doc
       };
-      console.log(hbsObject);
       res.render("saved", hbsObject);
     }
   });
@@ -90,16 +89,16 @@ router.delete("/delete/:id", function(req, res) {
 
 //add a note to an article
 router.post("/articles/:id", function(req, res) {
+    console.log(req.body);
     //create a new note and pass the req.body to the entry
     var newNote = new Note(req.body);
-    console.log(newNote);
     newNote.save(function(error, doc) {
         if (error) {
             console.log(error);
         }
         else {
             //use the article id to find and update it's note
-            Article.findOneAndUpdate({ "_id" : req.params.id }, {$push: {"note": doc._id }}, {new: true})
+            Article.findOneAndUpdate({ "_id" : req.params.id }, {"note": doc._id })
             //execute the above entry
             .exec(function(err, doc) {
                 if (err) {
