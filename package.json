@@ -1,7 +1,7 @@
 {
-  "name": "save-a-pet",
+  "name": "NPR-News-App",
   "version": "1.0.0",
-  "description": "find your new best friend in the local shelter",
+  "description": "Node.js and MongoDB app that scrapes NPR.org site and lets users comment on articles.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,9 +11,8 @@
     "url": "git+https://github.com/kristinakarrass/Save-A-Pet.git"
   },
   "keywords": [
-    "shelter",
-    "dog",
-    "cat"
+    "news",
+    "NPR"
   ],
   "author": "Kristina Karrass",
   "license": "ISC",
@@ -26,8 +25,9 @@
     "cheerio": "^1.0.0-rc.1",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
-    "materialize-css": "^0.99.0",
+    "method-override": "^2.3.9",
     "mongoose": "^4.10.8",
+    "morgan": "^1.8.2",
     "request": "^2.81.0"
   }
 }

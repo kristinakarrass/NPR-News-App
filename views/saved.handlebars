@@ -3,8 +3,7 @@
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo">NPR News Scraper</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/scrape" id="scrape" class="btn-large waves-effect waves-light red lighten-1">Scrape Articles</a></li>
-                    <li><a href="/articles" id="savedArcticles">Saved Articles</a></li>
+                    <li><a href="/scrape">Back to Scraped Articles</a></li>
                     <li>
                         <a href="http://www.npr.org/sections/news/" target="blank"><img id="logo" src="../images/logo.gif" alt="nprLogo"></a>
                     </li>
@@ -20,15 +19,12 @@
             <br>
             <h1 class="header center grey-text text-lighten-2">NPR News Scraper</h1>
             <div class="row center">
-                <h5 class="header col s12 light">Get the latest articles from NPR.org</h5>
+                <h5 class="header col s12 light">YOUR SAVED ARTICLES</h5>
             </div>
             <div class="row center">
               <ul class="collection">
-                {{#if this.num}}
-                <li class="collection-item red lighten-1 white-text"><h4>You have scraped {{this.num}} articles.</h4></li>
-                {{/if}}
-                {{#unless this.num}}
-                <li class="collection-item grey white-text"><h4>Scrape NPR articles by pressing the Scrape button.</h4></li>
+                {{#unless this}}
+                <li class="collection-item grey white-text"><h4>You don't have any saved articles.</h4></li>
                 {{/unless}}
               </ul>
             </div>
@@ -38,7 +34,7 @@
         <div class="container">
           <div class="row">
            {{!-- display each article in a card --}}
-            {{#each article}}
+            {{#each savedArticle}}
             <div class="col l4 left">
               <div class="card medium">
                 <div class="card-panel hoverable">
@@ -48,7 +44,8 @@
                   <div class="card-content">
                     <span class="card-title grey-text text-darken-4" style="font-size: 14px;"><a class="articleLink" href={{this.link}} target="blank">{{this.title}}</a><i class="material-icons right activator">more_vert</i></span>
                     <p class="center">
-                      <a class="btn black" id="save" data-imglink="{{this.imgLink}}" data-title="{{this.title}}" data-link="{{this.link}}" data-teaser="{{this.teaser}}">Save Article</a>
+                      <a class="btn black" id="delete" data-id="{{this.id}}">Delete</a>
+                      <a class="btn black" id="note" data-id="{{this.id}}">Note</a>
                     </p>
                   </div>
                   <div class="card-reveal">
@@ -69,14 +66,12 @@
         </div>
     </footer>
 
-  <!-- Error Modal -->
-  <div id="errorModal" class="modal">
-    <div class="modal-content">
-      <h4>Error</h4>
-      <p>This article has already been saved. Check out your saved articles for further options.</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
+<div id="noteModal" class="modal">
+  <div class="modal-content">
   </div>
+  <div class="modal-footer">
+    <a href="#" id="saveNote" class="modal-action modal-close waves-effect waves-red btn-flat">Save</a>
+    <a href="#" id="deleteNote" class="modal-action waves-effect waves-grey btn-flat">Delete</a>
+  </div>
+</div>
 

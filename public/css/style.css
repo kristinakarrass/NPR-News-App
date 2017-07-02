@@ -20,12 +20,20 @@
       margin-left: 40px;
   }
   
-  a.link.grey-text {
-      float: right;
-      margin-right: 20px;
+  a:hover {
+      -webkit-transform: scale(1.1);
   }
-  
+
   div.copyright.grey-text {
       padding-bottom: 20px;
       margin-left: 40px;
   }
+
+.card.card-title {
+	font-size: 18px;
+}
+
+#links {
+	margin: 15px;
+}
+
