@@ -83,8 +83,27 @@ router.delete("/delete/:id", function(req, res) {
             console.log(error);
         }
         else {
-            req.method = "GET";
-            res.redirect("/articles");
+
+        }
+    });
+});
+
+router.post("/articles/:id", function(req, res) {
+    //create a new note and pass the req.body to the entry
+    var newNote = new Note(req.body);
+    newNote.save(function(error, doc) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            //use the article id to find and update it's note
+            Article.findOneAndUpdate({ "_id" : req.params.id }, {"note": doc._id })
+            //execute the above entry
+            .exec(function(err, doc) {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
     });
 });

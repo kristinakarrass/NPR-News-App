@@ -25,4 +25,8 @@ $(document).on("click", "#delete", function() {
 
 });
 
-
+$(document).on("click", "#note", function() {
+	$("#noteModal").modal("open");
+	var id = $(this).data("id");
+	console.log(id);
+})

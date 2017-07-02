@@ -35,32 +35,28 @@
             <br>
             <br>
         </div>
+
         <div class="container">
           <div class="row">
-           {{!-- display each article in a card --}}
-            {{#each article}}
-            <div class="col l4 left">
-              <div class="card medium">
-                <div class="card-panel hoverable">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="{{this.imgLink}}">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title grey-text text-darken-4" style="font-size: 14px;"><a class="articleLink" href={{this.link}} target="blank">{{this.title}}</a><i class="material-icons right activator">more_vert</i></span>
-                    <p class="center">
-                      <a class="btn black" id="save" data-imglink="{{this.imgLink}}" data-title="{{this.title}}" data-link="{{this.link}}" data-teaser="{{this.teaser}}">Save Article</a>
-                    </p>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
-                    <p>{{this.teaser}}</p>
-                  </div>
+          {{#each article}}
+            <div class="col l4">
+              <div class="card hoverable">
+                <div class="card-image">
+                  <a class="articleLink" href={{this.link}} target="blank"><img src="{{this.imgLink}}"></a>
+                </div>
+                <div class="card-content">
+                <h5>{{this.title}}</h5>
+                  <p>{{this.teaser}}</p>
+                </div>
+                <div class="card-action center">
+                  <a class="btn black" id="save" data-imglink="{{this.imgLink}}" data-title="{{this.title}}" data-link="{{this.link}}" data-teaser="{{this.teaser}}">Save Article</a>
                 </div>
               </div>
-            </div>
-            {{/each}}
+          </div>
+          {{/each}}
         </div>
-        </div>
+      </div>
+
     </main>
 
     <footer class="page-footer black">
