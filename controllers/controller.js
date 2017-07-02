@@ -88,25 +88,45 @@ router.delete("/delete/:id", function(req, res) {
     });
 });
 
+//add a note to an article
 router.post("/articles/:id", function(req, res) {
     //create a new note and pass the req.body to the entry
     var newNote = new Note(req.body);
+    console.log(newNote);
     newNote.save(function(error, doc) {
         if (error) {
             console.log(error);
         }
         else {
             //use the article id to find and update it's note
-            Article.findOneAndUpdate({ "_id" : req.params.id }, {"note": doc._id })
+            Article.findOneAndUpdate({ "_id" : req.params.id }, {$push: {"note": doc._id }}, {new: true})
             //execute the above entry
             .exec(function(err, doc) {
                 if (err) {
                     console.log(err);
                 }
+                else {
+                    res.send(doc);
+                }
             });
         }
     });
 });
+
+//route to get note for specific article
+router.get("/articles/:id", function(req, res) {
+    Article.findOne({ "_id": req.params.id})
+    .populate("notes")
+    .exec(function(error, doc) {
+       if(error) {
+        console.log(error);
+       }
+       else {
+        res.json(doc);
+       }
+    });
+});
+
 
 //route to save notes
 //route to delete notes
