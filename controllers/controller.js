@@ -83,22 +83,22 @@ router.get("/articles", function(req, res) {
 router.delete("/delete/:id", function(req, res) {
     //delete notes
     Article.findOne({"_id": req.params.id }, function(err, data) {
-        console.log(data);
+        console.log(data.note);
         if (err) {
             console.log(err)
         }
-        else if (typeof data.note != "undefined"){
-            console.log("deleting note");
-            var noteIDs = data.note;
+        // else if (typeof data.note != "undefined"){
+        //     console.log("deleting note");
+        //     var noteIDs = data.note;
 
-                for (var i = 0; i < data.note.length; i++) {
-                    Note.findByIdAndRemove(data.note[i].id, function(error, doc) {
-                        if (error) {
-                            console.log(error)
-                        }
-                    });
-                }
-        }
+        //         for (var i = 0; i < data.note.length; i++) {
+        //             Note.findByIdAndRemove(data.note[i].id, function(error, doc) {
+        //                 if (error) {
+        //                     console.log(error)
+        //                 }
+        //             });
+        //         }
+        // }
     }); 
 
     //delete article

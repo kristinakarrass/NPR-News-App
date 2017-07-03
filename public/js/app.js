@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    $('.parallax').parallax();
     //save an article
     $(document).on("click", "#save", function() {
         $.ajax({
