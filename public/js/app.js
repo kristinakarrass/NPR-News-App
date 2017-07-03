@@ -39,13 +39,12 @@ $(document).ready(function() {
             method: "GET",
             url: "/articles/" + id
         }).done(function(data) {
-            if (!data.note) {
+        	console.log(data);
+            if (!data) {
                 $("#noteContent").append("<p>There are no saved notes for this article.</p>");
             } else {
                 $("#noteContent").val("");
-                for (var i = 0; i < data.length; i++) {
-                    $("#noteContent").append("<p>Note " + i + ":\n" + data.note + "</p><br><hr/>");
-                }
+                $("#noteContent").append("<p>Title: " + data.title + "<br>Note: " + data.body + "</p><br><hr/>");
             }
         });
     });

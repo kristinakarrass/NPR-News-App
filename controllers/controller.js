@@ -114,20 +114,32 @@ router.post("/articles/:id", function(req, res) {
 
 //route to get note for specific article
 router.get("/articles/:id", function(req, res) {
-    Article.findOne({ "_id": req.params.id})
-    .populate("notes")
-    .exec(function(error, doc) {
-       if(error) {
-        console.log(error);
-       }
-       else {
-        res.json(doc);
-       }
-    });
+    Article.findOne({ "_id": req.params.id}, function(err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        var id = doc.note;
+        Note.findOne({"_id": id}, function(err, doc) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.json(doc);
+            }
+        })
+    })
+    // .populate("notes")
+    // .exec(function(error, doc) {
+    //    console.log(doc);
+    //    if(error) {
+    //     console.log(error);
+    //    }
+    //    else {
+    //     res.json(doc);
+    //    }
+    // });
 });
 
 
-//route to save notes
 //route to delete notes
-//route to delete articles?
 module.exports = router;
