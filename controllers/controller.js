@@ -73,7 +73,6 @@ router.get("/articles", function(req, res) {
       var hbsObject = {
         savedArticle: doc
       };
-      console.log(hbsObject.savedArticle[0].note);
       res.render("saved", hbsObject);
     }
   });
@@ -83,22 +82,22 @@ router.get("/articles", function(req, res) {
 router.delete("/delete/:id", function(req, res) {
     //delete notes
     Article.findOne({"_id": req.params.id }, function(err, data) {
-        console.log(data.note);
+        console.log(data);
         if (err) {
-            console.log(err)
+            console.log(err);
         }
-        // else if (typeof data.note != "undefined"){
-        //     console.log("deleting note");
-        //     var noteIDs = data.note;
+        else if (data.note){
+            console.log("deleting note");
+            var noteIDs = data.note;
 
-        //         for (var i = 0; i < data.note.length; i++) {
-        //             Note.findByIdAndRemove(data.note[i].id, function(error, doc) {
-        //                 if (error) {
-        //                     console.log(error)
-        //                 }
-        //             });
-        //         }
-        // }
+                for (var i = 0; i < noteIDs.length; i++) {
+                    Note.findByIdAndRemove(noteIDs[i], function(error, doc) {
+                        if (error) {
+                            console.log(error)
+                        }
+                    });
+                }
+        }
     }); 
 
     //delete article
@@ -135,24 +134,6 @@ router.post("/articles/:id", function(req, res) {
         }
     });
 });
-
-// //route to get note for specific article
-// router.get("/articles/:id", function(req, res) {
-//     Article.findOne({ "_id": req.params.id}, function(err, doc) {
-//         if (err) {
-//             console.log(err);
-//         }
-//         var id = doc.note;
-//         Note.findOne({"_id": id}, function(err, doc) {
-//             if (err) {
-//                 console.log(err);
-//             }
-//             else {
-//                 res.json(doc);
-//             }
-//         });
-//     });
-// });
 
 //delete a note
 router.delete("/delete/notes/:id", function(req, res) {
