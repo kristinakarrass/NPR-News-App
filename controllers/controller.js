@@ -60,17 +60,20 @@ router.post("/save", function(req, res){
 // This will get the articles we scraped from the mongoDB
 router.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({}, function(error, doc) {
+  Article.find().sort({"_id": -1})
+  .populate("note").
+  exec(function(err, doc) {
     // console.log(doc);
     // Log any errors
-    if (error) {
-      console.log(error);
+    if (err) {
+      console.log(err);
     }
     // Or send the doc to the browser as a json object
     else {
       var hbsObject = {
         savedArticle: doc
       };
+      console.log(hbsObject.savedArticle[0].note);
       res.render("saved", hbsObject);
     }
   });
@@ -103,14 +106,16 @@ router.delete("/delete/:id", function(req, res) {
         if (error) {
             console.log(error);
         }
+        res.redirect("/articles");
     });
 });
 
 //add a note to an article
 router.post("/articles/:id", function(req, res) {
-    console.log(req.body);
     //create a new note and pass the req.body to the entry
     var newNote = new Note(req.body);
+    console.log(req.params.id);
+    //save new note to database
     newNote.save(function(error, doc) {
         if (error) {
             console.log(error);
@@ -124,40 +129,39 @@ router.post("/articles/:id", function(req, res) {
                     console.log(err);
                 }
                 else {
-                    res.send(doc);
+                    res.redirect("/articles");
                 }
             });
         }
     });
 });
 
-//route to get note for specific article
-router.get("/articles/:id", function(req, res) {
-    Article.findOne({ "_id": req.params.id}, function(err, doc) {
-        if (err) {
-            console.log(err);
-        }
-        var id = doc.note;
-        Note.findOne({"_id": id}, function(err, doc) {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                res.json(doc);
-            }
-        });
-    });
+// //route to get note for specific article
+// router.get("/articles/:id", function(req, res) {
+//     Article.findOne({ "_id": req.params.id}, function(err, doc) {
+//         if (err) {
+//             console.log(err);
+//         }
+//         var id = doc.note;
+//         Note.findOne({"_id": id}, function(err, doc) {
+//             if (err) {
+//                 console.log(err);
+//             }
+//             else {
+//                 res.json(doc);
+//             }
+//         });
+//     });
+// });
 
 //delete a note
-router.delete("/notes/:id", function(req, res) {
-    Notes.remove({_id: req.params.id}, function(err, doc) {
+router.delete("/delete/notes/:id", function(req, res) {
+    Notes.findByIdAndRemove({_id: req.params.id}, function(err, doc) {
         if (err) {
             console.log(err);
         }
     });
 });
-
-});//closes document.ready function
 
 
 //route to delete notes
