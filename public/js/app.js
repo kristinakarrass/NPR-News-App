@@ -28,7 +28,10 @@ $(document).ready(function() {
 
     //view notes of specific article
     $(document).on("click", "#note", function() {
+    	//open modal to add note
         $("#noteModal").modal("open");
+        //empty content
+        $("#noteContent").val("");
         var id = $(this).data("id");
         $("#saveNote").attr("data-id", id);
         $("#deleteNote").attr("data-id", id);
@@ -36,7 +39,6 @@ $(document).ready(function() {
             method: "GET",
             url: "/articles/" + id
         }).done(function(data) {
-            console.log(data);
             if (!data.note) {
                 $("#noteContent").append("<p>There are no saved notes for this article.</p>");
             } else {
@@ -53,16 +55,18 @@ $(document).ready(function() {
         event.preventDefault();
         var id = $(this).data("id");
         var note = $(".materialize-textarea").val().trim();
+        var title = $("#noteTitle").val().trim();
 
         $.ajax({
             method: "POST",
             url: "/articles/" + id,
             data: {
-                note: note
+            	title: title,
+                body: note
             }
-        }).done(function(data) {
-        	console.log(data);
         });
+        $(".materialize-textarea").val("");
+        $("#noteTitle").val("");        
     });
 
 

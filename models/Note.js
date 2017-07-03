@@ -5,6 +5,10 @@ var Schema = mongoose.Schema;
 
 //create NoteSchema
 var NoteSchema = new Schema({
+	//title can be just a string
+	title: {
+		type: String
+	},
 	//body can be just a string
 	body: {
 		type: String
