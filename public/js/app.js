@@ -31,7 +31,7 @@ $(document).ready(function() {
     	//open modal to add note
         $("#noteModal").modal("open");
         //empty content
-        $("#noteContent").val("");
+        $("#noteContent").html("");
         var id = $(this).data("id");
         $("#saveNote").attr("data-id", id);
         $("#deleteNote").attr("data-id", id);
@@ -44,7 +44,7 @@ $(document).ready(function() {
                 $("#noteContent").append("<p>There are no saved notes for this article.</p>");
             } else {
                 $("#noteContent").val("");
-                $("#noteContent").append("<p>Title: " + data.title + "<br>Note: " + data.body + "</p><br><hr/>");
+                $("#noteContent").append('<li>Title: ' + data.title + '<br>Note: ' + data.body + '<a id="deleteNote" data-id="' + data._id + '" class="modal-action waves-effect waves-grey btn-flat grey">Delete</a>');
             }
         });
     });
@@ -68,5 +68,15 @@ $(document).ready(function() {
         $("#noteTitle").val("");        
     });
 
+    //delete note from article
+    $(document).on("click", "#deleteNote", function() {
+    	event.preventDefault();
+    	var id = $(this).data("id");
+    	console.log(id);
+    	$.ajax({
+    		method: "DELETE",
+    		url: "/notes/" + id
+    	});
+    });
 
 });

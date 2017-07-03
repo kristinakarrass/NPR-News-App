@@ -76,13 +76,32 @@ router.get("/articles", function(req, res) {
   });
 });
 
+//delete article == make sure notes are deleted, too
 router.delete("/delete/:id", function(req, res) {
+    //delete notes
+    Article.findOne({"_id": req.params.id }, function(err, data) {
+        console.log(data);
+        if (err) {
+            console.log(err)
+        }
+        else if (typeof data.note != "undefined"){
+            console.log("deleting note");
+            var noteIDs = data.note;
+
+                for (var i = 0; i < data.note.length; i++) {
+                    Note.findByIdAndRemove(data.note[i].id, function(error, doc) {
+                        if (error) {
+                            console.log(error)
+                        }
+                    });
+                }
+        }
+    }); 
+
+    //delete article
     Article.findByIdAndRemove(req.params.id, function(error, doc) {
         if (error) {
             console.log(error);
-        }
-        else {
-
         }
     });
 });
@@ -98,7 +117,7 @@ router.post("/articles/:id", function(req, res) {
         }
         else {
             //use the article id to find and update it's note
-            Article.findOneAndUpdate({ "_id" : req.params.id }, {"note": doc._id })
+            Article.findOneAndUpdate({ "_id" : req.params.id }, { $push: {"note": doc._id }}, {new: true})
             //execute the above entry
             .exec(function(err, doc) {
                 if (err) {
@@ -126,19 +145,19 @@ router.get("/articles/:id", function(req, res) {
             else {
                 res.json(doc);
             }
-        })
-    })
-    // .populate("notes")
-    // .exec(function(error, doc) {
-    //    console.log(doc);
-    //    if(error) {
-    //     console.log(error);
-    //    }
-    //    else {
-    //     res.json(doc);
-    //    }
-    // });
+        });
+    });
+
+//delete a note
+router.delete("/notes/:id", function(req, res) {
+    Notes.remove({_id: req.params.id}, function(err, doc) {
+        if (err) {
+            console.log(err);
+        }
+    });
 });
+
+});//closes document.ready function
 
 
 //route to delete notes

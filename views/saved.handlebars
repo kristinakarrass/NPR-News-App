@@ -19,11 +19,11 @@
             <br>
             <h1 class="header center grey-text text-lighten-2">NPR News Scraper</h1>
             <div class="row center">
-                <h5 class="header col s12 light">YOUR SAVED ARTICLES</h5>
-            </div>
-            <div class="row center">
               <ul class="collection">
-                {{#unless this}}
+                {{#if savedArticle}}
+                <li class="collection-item grey white-text"><h4>Your saved articles.</h4></li>
+                {{/if}}
+                {{#unless savedArticle}}
                 <li class="collection-item grey white-text"><h4>You don't have any saved articles.</h4></li>
                 {{/unless}}
               </ul>
@@ -66,9 +66,8 @@
 {{!-- modal for note --}}
 <div id="noteModal" class="modal">
   <div class="modal-content">
-  <div id="noteContent">
-    <h3>Notes</h3>
-  </div>
+    <h3>Notes</h3>  
+    <div id="noteContent"></div>
   {{!-- input field for modal --}}
      <div class="row">
       <form class="col s12">
@@ -78,7 +77,6 @@
             <label for="first_name">Title</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix">mode_edit</i>
             <textarea id="noteBody" class="materialize-textarea" placeholder="Write your note here."></textarea>
             <label for="icon_prefix2">Note</label>
           </div>
@@ -88,7 +86,6 @@
   </div>
   <div class="modal-footer">
     <a id="saveNote" class="modal-action modal-close waves-effect waves-red btn-flat grey">Save</a>
-    <a id="deleteNote" class="modal-action waves-effect waves-grey btn-flat grey">Delete</a>
   </div>
 </div>
 
