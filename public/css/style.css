@@ -1,5 +1,5 @@
   body {
-      background-image: url("./images/paper.jpg");
+      /*background-image: url("../images/paper.jpg");*/
       display: flex;
       min-height: 100vh;
       flex-direction: column;
@@ -21,6 +21,10 @@
     margin-bottom: 0;
   }
   
+  .row.right {
+    margin-right: 50px;
+  }
+  
   .npr {
     background-color: white;
   }
@@ -36,6 +40,10 @@
       padding-bottom: 20px;
       margin-left: 40px;
   }
+
+.card.hoverable.index {
+  height: 550px;
+}
 
 .card.card-title {
 	font-size: 18px;

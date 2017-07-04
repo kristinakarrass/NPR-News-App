@@ -19,28 +19,14 @@ $(document).ready(function() {
         var id = $(this).data("id");
         console.log(id);
         $.ajax({
-            method: "Delete",
+            method: "DELETE",
             url: "/delete/" + id
         });
         location.href = "/articles";
     });
-
-
-    //view notes of specific article
-    // $(document).on("click", "#note", function() {
-    //     var id = $(this).data("id");
-    //     $("#saveNote").attr("data-id", id);
-    //     $("#deleteNote").attr("data-id", id);
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "/articles/" + id
-    //     })
-    //     .done(function(data) {
-    //     	console.log(data);
-    //     });
-    // });
     
-    //save note of specific article
+    //save note for specific article
+    //TO DO make collapsible header not active so it closes after saving note
     $(document).on("click", "#saveNote", function() {
         event.preventDefault();
         var id = $(this).data("id");
@@ -55,7 +41,8 @@ $(document).ready(function() {
             	title: title,
                 body: note
             }
-        }).done(function() {
+        })
+        .done(function() {
         $(".materialize-textarea").val("");
         $("#noteTitle").val(""); 
         });
@@ -66,12 +53,12 @@ $(document).ready(function() {
     $(document).on("click", "#deleteNote", function() {
     	event.preventDefault();
     	var id = $(this).data("id");
-    	var baseURL = window.location.origin;
     	console.log(id);
     	$.ajax({
     		method: "DELETE",
-    		url: baseURL + "/delete/notes/" + id
+    		url: "/delete/notes/" + id
     	});
+        location.href = "/articles";
     });
 
 });

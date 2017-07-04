@@ -5,7 +5,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/scrape">Back to Scraped Articles</a></li>
                     <li>
-                        <a href="http://www.npr.org/sections/news/" target="blank"><img id="logo" src="../images/logo.gif" alt="nprLogo"></a>
+                        <a href="http://www.npr.org/sections/news/" target="blank"><img id="logo" src="images/logo.gif" alt="nprLogo"></a>
                     </li>
                     <li><a href="https://github.com/kristinakarrass/NPR-News-App" target="blank">Git Hub Repo</a></li>
                 </ul>
@@ -46,10 +46,7 @@
     <!-- Article Drop Down -->
     <li>
       <div style="background-color: white;" class="collapsible-header grey lighten-2">
-
-
         <div style="clear: left; line-height: 110%; padding-bottom: 10px; padding-top: 10px;"><span><i class="material-icons" style="font-size:36px; line-height: 1.6rem;">expand_more</i><b>{{this.title}}</b></span></div>
-
       </div>
       <div class="collapsible-body" style="background-color: white;">
         <p>
@@ -116,19 +113,17 @@
             {{#each this.note}}
             
               <li class="collection-item">
-
+                {{!-- Add the title of the note --}}
+                <h5>{{this.title}}</h5>
+                {{!-- Add the Content of the Note --}}
+                <p>{{this.body}}</p>                
                 {{!-- Add a Delete Button --}}
                 <span class="badge">
-                  <form id="form-delete-{{this.id}}" action="/note/{{this.id}}" method="_delete">
-                    <input class="btn-small delete-comment-button" id="delete" data-id="{{this.id}}" type="submit" value="Delete" style="color: white; background-color: red; border-color: red;">
+                  <form id="form-delete-{{this.id}}" action="/delete/notes/{{this.id}}?_method=DELETE" method="POST">
+                    <input class="btn-small delete-comment-button" id="deleteNote" data-id="{{this.id}}" type="submit" value="Delete" style="color: white; background-color: black; border-color: grey;">
                   </form>
                 </span>
-
                 <br>
-
-                {{!-- Add the Content of the Note --}}
-                <p>{{this.body}}</p>
-
               </li> 
             {{/each}}
           </ul>
@@ -161,29 +156,4 @@
         </div>
     </footer>
 
-{{!-- modal for note --}}
-<div id="noteModal" class="modal">
-  <div class="modal-content">
-    <h3>Notes</h3>  
-    <div id="noteContent"></div>
-  {{!-- input field for modal --}}
-     <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="" id="noteTitle" type="text" class="validate">
-            <label for="first_name">Title</label>
-          </div>
-          <div class="input-field col s12">
-            <textarea id="noteBody" class="materialize-textarea" placeholder="Write your note here."></textarea>
-            <label for="icon_prefix2">Note</label>
-          </div>
-        </div>
-      </form>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <a id="saveNote" class="modal-action modal-close waves-effect waves-red btn-flat grey">Save</a>
-  </div>
-</div>
 
