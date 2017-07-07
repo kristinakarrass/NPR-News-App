@@ -103,7 +103,7 @@ router.delete("/delete/:id", function(req, res) {
         if (error) {
             console.log(error);
         }
-        res.redirect("/articles");
+        res.send(doc);
     });
 });
 
